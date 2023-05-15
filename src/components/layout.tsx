@@ -1,37 +1,74 @@
-import MatrixRain from './matrixrain';
-import React from 'react';
+: import React from 'react';
+import { Link } from 'react-router-dom';
+import { AiFillLinkedin } from 'react-icons/ai';
 
 interface LayoutProps {
   children?: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+    const handleWhatsAppClick = () => {
+    const phoneNumber = "+491731673761"; // Replace with your WhatsApp phone number
+    const message = "Hello, I want to get in touch."; // Customize the initial message
+    
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+};
+
   return (
     <>
-      <MatrixRain />
-      <div className="mx-auto flex flex-col space-y-4 relative z-10 min-h-screen">
-        <div className="sticky top-0 z-40 bg-black bg-opacity-50">
-          <header className="w-full">
-            <div className="container h-16 border-b border-b-slate-200 py-4 flex flex-col justify-center items-center">
-              <h1 className="text-green-400 font-mono text-3xl">IustusAI</h1>
-              <h2 className="text-green-400 font-mono text-sm">Powered by ChatGPT</h2>
+      <div className="mx-auto flex flex-col min-h-screen relative">
+        <header className="sticky top-0 z-40 bg-black bg-opacity-50">
+          <div className="container flex justify-between items-center h-16 py-4">
+            <div className="flex-1 text-center">
+              <h1 className="text-green-400 font-mono text-3xl">
+                <Link
+                  to="/"
+                  className="hover:text-yellow-400 transition-colors duration-300"
+                >
+                  Iustus<span className="text-yellow-400">AI</span>
+                </Link>
+              </h1>
             </div>
-          </header>
-          <main className="flex w-full flex-1 flex-col overflow-hidden">
-            {children}
-          </main>
-        </div>
-        <footer className="w-full bottom-0 z-40 bg-black bg-opacity-50">
-          <div className="container h-16 border-t border-t-slate-200 py-4 flex flex-col justify-center items-center">
-            <h2 className="text-green-400 font-mono text-sm">Demo built by Ilja Garber</h2>
-            <a
-              className="text-green-400 font-mono text-sm hover:underline"
-              href="https://github.com/AI-65"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              @AI-65
-            </a>
+            <div>
+            <button
+                className="text-green-400 font-mono text-sm hover:underline"
+                onClick={handleWhatsAppClick}
+              >
+                Vertrieb kontaktieren
+              </button>
+            </div>
+          </div>
+        </header>
+        <main className="flex w-full flex-1 flex-col overflow-hidden">
+          {children}
+        </main>
+        <footer className="sticky bottom-0 z-40 bg-black bg-opacity-50">
+          <div className="container h-16 py-4 flex justify-center items-center">
+            <div className="flex space-x-4 justify-start w-full">
+              <Link className="text-green-400 font-mono text-sm hover:underline" to="/impressum">
+                Impressum
+              </Link>
+              <Link className="text-green-400 font-mono text-sm hover:underline" to="/agb">
+                AGB
+              </Link>
+              <Link className="text-green-400 font-mono text-sm hover:underline" to="/datenschutzerklärung">
+                Datenschutzerklärung
+              </Link>
+              <Link className="text-green-400 font-mono text-sm hover:underline" to="/cookierichtlinie">
+                Cookie-Richtlinie
+              </Link>
+            </div>
+            <div>
+              <a
+                className="text-green-400 font-mono text-3xl hover:underline"
+                href="https://www.linkedin.com/in/your-linkedin-profile"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <AiFillLinkedin />
+              </a>
+            </div>
           </div>
         </footer>
       </div>
